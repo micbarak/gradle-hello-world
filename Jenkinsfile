@@ -9,7 +9,7 @@ node("slave1") {
     }
   }
   catch (ex){
-    echo "Erroe has occured!"
+    echo "Error has occured!"
   }
   post {
     if (currentBuild.result == 'SUCCESS'){

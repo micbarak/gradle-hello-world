@@ -1,22 +1,25 @@
-node("slave1") {
-  gradleHome = tool 'gradle4'
-  try{
-    stage ("Checkout"){
-      checkout scm
-    }
-    stage ("build"){
-      sh "${gradleHome}/bin/gradle" 'build'
-    }
+node('slave1') { //optionally add node label: node (‘slave1’)
+ gradle4 = tool 'gradle4'
+ currentBuild.result = "SUCCESS"
+ try {
+  stage ('checkout'){
+     checkout scm
   }
-  catch (ex){
-    echo "Error has occured!"
+  stage ('build')
+  {
+      sh "${gradle4}/bin/gradle build"
   }
-  stage ("post") {
-    if (currentBuild.result == 'SUCCESS' || currentBuild.result == null){
-      addBadge(icon: 'success.gif', text: 'very good!')
-    }else if (currentBuild.result == 'FAILURE'){
-      addBadge(icon: 'error.gif', text: 'not very good!')
-    }
+ } catch (ex) {
+  currentBuild.result = "FAILURE"
+  echo 'Error occured'
+ }
+ stage('post') {
+  echo "Build result is " + currentBuild.result
+  if ( currentBuild.result == 'SUCCESS') {
+   addBadge(icon: 'green.gif', text: 'Build Succeeded')
   }
-  
+  if (currentBuild.result == 'FAILURE') {
+   addBadge(icon: 'red.gif', text: 'Build Failed')
+  } 
+ }
 }

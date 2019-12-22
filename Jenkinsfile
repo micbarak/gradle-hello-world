@@ -5,7 +5,7 @@ node("slave1") {
       checkout scm
     }
     stage ("build"){
-      sh ${gradleHome}/bin/gradle 'build'
+      sh "${gradleHome}/bin/gradle" 'build'
     }
   }
   catch (ex){

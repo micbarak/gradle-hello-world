@@ -1,10 +1,15 @@
 node("slave1") {
-  def gradleHome = tool 'gradle4'
-  stage ("Checkout"){
-    checkout scm
+  gradleHome = tool 'gradle4'
+  try{
+    stage ("Checkout"){
+      checkout scm
+    }
+    stage ("build"){
+      sh ${gradleHome}/bin/gradle 'build'
+    }
   }
-  stage ("build"){
-    sh ${gradleHome}/bin/gradle 'build'
+  catch (ex){
+    echo "Erroe has occured!"
   }
   post {
     if (currentBuild.result == 'SUCCESS' || currentBuild.result == 'SUCCESS'){

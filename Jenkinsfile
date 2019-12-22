@@ -12,9 +12,9 @@ node("slave1") {
     echo "Erroe has occured!"
   }
   post {
-    if (currentBuild.result == 'SUCCESS' || currentBuild.result == 'SUCCESS'){
+    if (currentBuild.result == 'SUCCESS'){
       addBadge(icon: 'success.gif', text: 'very good!')
-    }else{
+    }else if (currentBuild.result == 'FAILURE'){
       addBadge(icon: 'error.gif', text: 'not very good!')
     }
   }

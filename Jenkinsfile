@@ -11,7 +11,7 @@ node("slave1") {
   catch (ex){
     echo "Error has occured!"
   }
-  post {
+  stage ("post") {
     if (currentBuild.result == 'SUCCESS'){
       addBadge(icon: 'success.gif', text: 'very good!')
     }else if (currentBuild.result == 'FAILURE'){

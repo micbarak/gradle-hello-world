@@ -1,4 +1,4 @@
-node {label "slave1"}{
+node("slave1") {
   def gradleHome = tool 'gradle4'
   stage ("Checkout"){
     checkout scm

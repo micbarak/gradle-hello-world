@@ -4,7 +4,7 @@ node {label "slave1"}{
     checkout scm
   }
   build ("build"){
-    sh "${gradleHome}/bin/gradle 'gradle build'
+    sh "${gradleHome}/bin/gradle 'build'
   }
   post {
     if (currentBuild.result == 'SUCCESS' || currentBuild.result == 'SUCCESS'){

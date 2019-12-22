@@ -3,7 +3,7 @@ node {label "slave1"}{
   stage ("Checkout"){
     checkout scm
   }
-  build ("build"){
+  stage ("build"){
     sh ${gradleHome}/bin/gradle 'build'
   }
   post {
